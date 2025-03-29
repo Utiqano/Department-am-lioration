@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WKW AUTOMOTIVE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #dc143c;
+            --secondary-color: #8b4513;
+            --light-bg: #f8f9fa;
+            --dark-bg: #1a1a1a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+            --red-color: #ff0000;
+            --orange-color: #ff8000;
+            --green-color: #00cc00;
+            --text-color: #333;
+            --body-bg: #fff;
+            --gradient-bg: linear-gradient(135deg, #dc143c, #8b4513);
+            --navbar-bg: linear-gradient(135deg, #dc143c, #8b4513);
+            --navbar-scrolled-bg: linear-gradient(135deg, rgba(220, 20, 60, 0.95), rgba(139, 69, 19, 0.95));
+        }
+
+        .night-mode {
+            --text-color: #e0e0e0;
+            --body-bg: #121212;
+            --light-bg: #2a2a2a;
+            --dark-bg: #0d0d0d;
+            --navbar-bg: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            --navbar-scrolled-bg: linear-gradient(135deg, rgba(42, 42, 42, 0.95), rgba(26, 26, 26, 0.95));
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--body-bg);
+            transition: var(--transition);
+        }
+
+        .navbar {
+            background: var(--navbar-bg);
+            padding: 1.5rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar.scrolled {
+            background: var(--navbar-scrolled-bg);
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 2rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+            transition: var(--transition);
+        }
+
+        .navbar-brand:hover::after {
+            left: 0;
+        }
+
+        .navbar-brand:hover {
+            color: #fff;
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-item {
+            margin: 0 0.75rem;
+            position: relative;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem !important;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            left: 0;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff !important;
+            transform: scale(1.05);
+        }
+
+        .dropdown-menu {
+            background-color: var(--dark-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .dropdown-item {
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            color: var(--text-color);
+            font-size: 1.6rem;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-container {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #c3cfe2 100%);
+            padding: 6rem 0;
+            margin-top: 80px;
+        }
+
+        .center-image img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .center-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .percentage-alert {
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: var(--light-bg);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .percentage-alert:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            padding: 2.5rem;
+            background-color: var(--body-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin: 0 auto;
+            transition: var(--transition);
+        }
+
+        .contact-form:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 0.75rem;
+            transition: var(--transition);
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(220, 20, 60, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: #b11231;
+            border-color: #b11231;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem;
+        }
+
+        footer i {
+            margin-left: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .modal-content {
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+        }
+
+        .night-mode-toggle {
+            display: block;
+            margin: 80px auto 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            width: 120px;
+        }
+
+        .night-mode-toggle:hover {
+            background-color: #b11231;
+        }
+
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+            .navbar-nav {
+                flex-direction: row;
+            }
+            .nav-link {
+                padding: 0.5rem 1rem !important;
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            .night-mode-toggle {
+                margin: 70px auto 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h3 { font-size: 1.3rem; }
+            .section-container { padding: 2rem 0; }
+            .hero-section { padding: 3rem 0; }
+            .contact-form { padding: 1.5rem; }
+            .navbar { padding: 1rem; }
+            .nav-link { padding: 0.5rem 0.75rem !important; font-size: 0.9rem; }
+            .navbar-brand { font-size: 1.2rem; }
+            .center-image img { max-width: 200px; }
+            .night-mode-toggle { margin: 60px auto 1rem; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 576px) {
+            h1 { font-size: 1.8rem; }
+            h3 { font-size: 1.1rem; }
+            .navbar { padding: 0.75rem; }
+            .nav-link { padding: 0.5rem 0.5rem !important; font-size: 0.8rem; }
+            .navbar-brand { font-size: 1rem; }
+            .center-image img { max-width: 150px; }
+            .percentage-alert { padding: 1.5rem; }
+            .contact-form { padding: 1rem; }
+            footer { font-size: 0.9rem; padding: 1.5rem; }
+            .night-mode-toggle { margin: 50px auto 1rem; font-size: 0.8rem; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">WKW AUTOMOTIVE</a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="pourcentageToggle" data-bs-toggle="collapse" data-bs-target="#pourcentageSection">Pourcentage</a>
+                    <div class="collapse" id="pourcentageSection">
+                        <ul class="list-unstyled ms-3">
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux 5S UAP1', '80%')">Taux 5S UAP1</a></li>
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux Gemba UAP1', '81%')">Taux Gemba UAP1</a></li>
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux 5S Logistique', '80%')">Taux 5S Logistique</a></li>
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux Gemba Logistique', '75%')">Taux Gemba Logistique</a></li>
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux 5S Usine', '79%')">Taux 5S Usine</a></li>
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux Gemba Usine', '78%')">Taux Gemba Usine</a></li>
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux 5S UAP2', '77%')">Taux 5S UAP2</a></li>
+                            <li><a class="nav-link" href="#" onclick="showPercentage('Taux Gemba UAP2', '74%')">Taux Gemba UAP2</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#auditSection">Audit</a>
+                    <div class="collapse" id="auditSection">
+                        <ul class="list-unstyled ms-3">
+                            <li><a class="nav-link" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUM1hRVVYyQ0hBOFpGQ1lGMlgzSkpNS1BETC4u&route=shorturl" target="_blank">Audit Gemba OJT Ligne</a></li>
+                            <li><a class="nav-link" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUMDVBQkVHM002WUhaNUdINVpaTFpTTTVSRC4u&route=shorturl" target="_blank">Audit Gemba Mur Qualité</a></li>
+                            <li><a class="nav-link" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRURjJOMUdPOVFXU1FUR0tCN09WQTdJWVdHRS4u&route=shorturl" target="_blank">Audit Gemba Magasin</a></li>
+                            <li><a class="nav-link" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUNzQ4MldBM0dTVzc0MFRHVlc0UlU2VE9QRi4u&route=shorturl" target="_blank">Audit 5S</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#videoSection">Vidéos</a>
+                    <div class="collapse" id="videoSection">
+                        <ul class="list-unstyled ms-3">
+                            <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/ni5AtO-92YE">Instruction de contrôle 100%</a></li>
+                            <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/finG5RcRS1w">Instruction de nettoyage presse injection</a></li>
+                            <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/pE_ptDrpPDM">F83</a></li>
+                            <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/BweHTgi-L_Y">Instruction tri sélectif</a></li>
+                            <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/PlZpe_P7OU8">Proposition d'amélioration</a></li>
+                            <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video="https://www.youtube.com/embed/ntKqMhbqTII">5S</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="planActionToggle" data-bs-toggle="collapse" data-bs-target="#planActionSection">Plan d'action</a>
+                    <div class="collapse" id="planActionSection">
+                        <ul class="list-unstyled ms-3">
+                            <li><a class="nav-link" href="https://www.google.com" target="_blank">Plan d'action Gemba</a></li>
+                            <li><a class="nav-link" href="https://www.yahoo.com" target="_blank">Plan d'action 5S</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact" id="contactToggle" data-bs-toggle="collapse" data-bs-target="#contactSection">Contactez-nous</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://forms.office.com/e/TpWLh24LzL" target="_blank">Proposition d'Amélioration</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#planningSection">Planning</a>
+                    <div class="collapse" id="planningSection">
+                        <ul class="list-unstyled ms-3">
+                            <li><a class="nav-link" href="https://wkwgroup-my.sharepoint.com/:x:/r/personal/houssine_trabelsi_wkw-group_com/_layouts/15/Doc.aspx?sourcedoc=%7BE62360FF-0F09-45B3-8656-782A6158348F%7D&file=Planning%205S.xlsx&action=default&mobileredirect=true" target="_blank">Planning 5S</a></li>
+                            <li><a class="nav-link" href="https://wkwgroup-my.sharepoint.com/:x:/g/personal/houssine_trabelsi_wkw-group_com/ETxX6xG42nFJqQV1-PaMiFIB2aBMLG-Ux7JdHCwLSOYtIA?e=B1xLbs" target="_blank">Planning Gemba</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <button class="night-mode-toggle" id="nightModeToggle">Mode Nuit</button>
+
+    <section id="accueil" class="section-container hero-section text-center fade-in">
+        <div class="container">
+            <h1>Département Amélioration Continue WKW</h1>
+            <h3>L’amélioration continue est bien plus qu’une simple démarche; c’est le cœur battant de la performance industrielle moderne. Selon la norme ISO 9000, elle désigne l’ensemble des activités régulières visant à accroître l’efficience des processus.</h3>
+            <div class="center-image">
+                <img src="https://media.licdn.com/dms/image/v2/C510BAQFv4NwvhYRq8Q/company-logo_200_200/company-logo_200_200/0/1631351838133?e=2147483647&v=beta&t=pE5-TQRX2fd9oIfzQypoBLterLoj-X4wOnC3C8MMI4Q" alt="WKW Group Logo">
+            </div>
+        </div>
+    </section>
+
+    <section id="percentageResult" class="section-container container" style="display: none;">
+        <div class="percentage-alert" id="percentageDisplay">
+            <h4 id="percentageTitle"></h4>
+            <p id="percentageValue" class="display-4"></p>
+        </div>
+    </section>
+
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Vidéo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="videoPlayer" width="100%" height="400" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="section-container container">
+        <div class="collapse" id="contactSection">
+            <div class="contact-form fade-in">
+                <h2 class="text-center mb-4">Contactez-nous</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nom:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © جميع الحقوق محفوظة WKW Amélioration Département <i class="fas fa-cogs"></i>
+    </footer>
+
+    <script>
+        (function() {
+            emailjs.init("3yJlZosC-pbJKwn0Q");
+        })();
+
+        const ADMIN_PASSWORD = "admin123";
+        let isAuthenticated = false;
+
+        const toggleButton = document.getElementById('nightModeToggle');
+        const body = document.body;
+        const navbar = document.querySelector('.navbar');
+
+        if (localStorage.getItem('nightMode') === 'enabled') {
+            body.classList.add('night-mode');
+            toggleButton.textContent = 'Mode Jour';
+        }
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('night-mode');
+            if (body.classList.contains('night-mode')) {
+                toggleButton.textContent = 'Mode Jour';
+                localStorage.setItem('nightMode', 'enabled');
+            } else {
+                toggleButton.textContent = 'Mode Nuit';
+                localStorage.setItem('nightMode', 'disabled');
+            }
+        });
+
+        function showPercentage(title, percentage) {
+            const section = document.getElementById('percentageResult');
+            const percentageValue = document.getElementById('percentageValue');
+            const numericValue = parseFloat(percentage);
+
+            document.getElementById('percentageTitle').innerText = title;
+            percentageValue.innerText = percentage;
+
+            if (numericValue >= 0 && numericValue <= 74) {
+                percentageValue.style.color = 'var(--red-color)';
+            } else if (numericValue >= 75 && numericValue <= 89) {
+                percentageValue.style.color = 'var(--orange-color)';
+            } else if (numericValue >= 90 && numericValue <= 100) {
+                percentageValue.style.color = 'var(--green-color)';
+            }
+
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.getElementById('pourcentageToggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            const pourcentageSection = document.getElementById('pourcentageSection');
+            const isCollapsed = !pourcentageSection.classList.contains('show');
+
+            if (!isAuthenticated && isCollapsed) {
+                const password = prompt("Veuillez entrer le mot de passe administrateur :");
+                if (password === ADMIN_PASSWORD) {
+                    isAuthenticated = true;
+                    alert("Accès autorisé !");
+                    bootstrap.Collapse.getOrCreateInstance(pourcentageSection).show();
+                } else {
+                    alert("Mot de passe incorrect !");
+                }
+            } else {
+                const collapse = bootstrap.Collapse.getOrCreateInstance(pourcentageSection);
+                if (isCollapsed) {
+                    collapse.show();
+                } else {
+                    collapse.hide();
+                }
+            }
+        });
+
+        document.getElementById('planActionToggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            const planActionSection = document.getElementById('planActionSection');
+            const isCollapsed = !planActionSection.classList.contains('show');
+
+            if (!isAuthenticated && isCollapsed) {
+                const password = prompt("Veuillez entrer le mot de passe administrateur :");
+                if (password === ADMIN_PASSWORD) {
+                    isAuthenticated = true;
+                    alert("Accès autorisé !");
+                    bootstrap.Collapse.getOrCreateInstance(planActionSection).show();
+                } else {
+                    alert("Mot de passe incorrect !");
+                }
+            } else {
+                const collapse = bootstrap.Collapse.getOrCreateInstance(planActionSection);
+                if (isCollapsed) {
+                    collapse.show();
+                } else {
+                    collapse.hide();
+                }
+            }
+        });
+
+        document.getElementById('contactToggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            const contactSection = document.getElementById('contactSection');
+            const collapse = new bootstrap.Collapse(contactSection, {
+                toggle: true
+            });
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.querySelectorAll('[data-bs-toggle="modal"]').forEach(link => {
+            link.addEventListener('click', e => {
+                const videoSrc = e.target.getAttribute('data-video');
+                document.getElementById('videoPlayer').src = videoSrc;
+            });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            emailjs.send('service_bvzi4ft', 'template_py9w0zf', formData)
+                .then(() => {
+                    alert('Message envoyé avec succès!');
+                    this.reset();
+                }, (error) => {
+                    alert('Erreur lors de l\'envoi du message: ' + error.text);
+                });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

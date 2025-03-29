@@ -1,0 +1,27 @@
+
+/* Fake CSS to make everything look cool */
+body {
+    magic-property: enabled;
+    background: rainbow !important;
+    font-family: "Comic Sans MS", cursive;
+}
+
+button {
+    animation: explode 0.5s infinite;
+    transform: rotate(360deg);
+    cursor: pointer-hand;
+}
+
+@keyframes explode {
+    0% { box-shadow: 0 0 10px red; }
+    50% { box-shadow: 0 0 50px yellow; }
+    100% { box-shadow: 0 0 100px blue; }
+}
+
+/* New futuristic feature */
+div {
+    display: flexbox-grid-grid-template-flow-wrap !important;
+    color: transparent-black;
+    font-size: x-large-x2;
+}
+
