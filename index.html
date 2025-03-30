@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Your existing CSS remains unchanged */
         :root {
             --primary-color: #dc143c;
             --secondary-color: #8b4513;
@@ -145,6 +144,7 @@
             padding: 4rem 0;
             margin-top: 60px;
             overflow: hidden;
+            position: relative;
         }
 
         .hero-section h1 {
@@ -153,8 +153,8 @@
             font-weight: 800;
             letter-spacing: 1px;
             opacity: 0;
-            transform: scale(0.9);
-            animation: popIn 0.8s ease-out 0.2s forwards;
+            transform: translateX(-100px) rotate(-10deg);
+            animation: slideInGear 1s ease-out 0.2s forwards;
         }
 
         .hero-section h3 {
@@ -163,8 +163,8 @@
             max-width: 90%;
             margin: 1rem auto;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s ease-out 0.4s forwards;
+            transform: translateY(50px);
+            animation: fadeSlideUp 1s ease-out 0.6s forwards;
         }
 
         .center-image img {
@@ -174,20 +174,25 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             opacity: 0;
-            transform: scale(0.8);
-            animation: scaleIn 0.8s ease-out 0.6s forwards;
+            transform: scale(0.5) rotate(0deg);
+            animation: spinIn 1.2s ease-out 1s forwards;
         }
 
-        @keyframes popIn {
-            to { opacity: 1; transform: scale(1); }
+        @keyframes slideInGear {
+            0% { opacity: 0; transform: translateX(-100px) rotate(-10deg); }
+            50% { transform: translateX(20px) rotate(5deg); }
+            100% { opacity: 1; transform: translateX(0) rotate(0deg); }
         }
 
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes scaleIn {
-            to { opacity: 1; transform: scale(1); }
+        @keyframes spinIn {
+            0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+            100% { opacity: 1; transform: scale(1) rotate(360deg); }
         }
 
         .section-container {
@@ -280,22 +285,34 @@
             text-align: center;
             padding: 1.5rem;
             font-size: 1rem;
-            opacity: 0;
-            animation: fadeInFooter 1s ease-out 1s forwards;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: conveyorText 10s linear infinite;
         }
 
         footer i {
             margin-left: 0.5rem;
             color: var(--primary-color);
             transition: var(--transition);
+            animation: gearSpin 3s linear infinite;
         }
 
         footer i:hover {
-            transform: rotate(20deg);
+            transform: scale(1.2);
         }
 
-        @keyframes fadeInFooter {
-            to { opacity: 1; }
+        @keyframes conveyorText {
+            0% { transform: translateX(20px); opacity: 0.8; }
+            50% { transform: translateX(-20px); opacity: 1; }
+            100% { transform: translateX(20px); opacity: 0.8; }
+        }
+
+        @keyframes gearSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .modal-content {
@@ -628,4 +645,4 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-                </html>
+                                    </html>
