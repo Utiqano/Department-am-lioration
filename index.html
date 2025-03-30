@@ -477,7 +477,7 @@
                             <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a></li>
                             <li><a class="dropdown-item" href="#" onclick="changeLanguage('ar')">العربية</a></li>
                             <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('nl')">Nederlands</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('de')">Deutsch</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -592,20 +592,20 @@
                 sendButton: "Send",
                 footer: "© All rights reserved WKW Improvement Department"
             },
-            nl: {
-                home: "Home",
-                performance: "Prestaties",
-                resources: "Bronnen",
-                contact: "Contact",
+            de: {
+                home: "Startseite",
+                performance: "Leistung",
+                resources: "Ressourcen",
+                contact: "Kontakt",
                 nightMode: "Nachtmodus",
-                heroTitle: "WKW Afdeling Continue Verbetering",
-                heroSubtitle: "Continue verbetering is meer dan alleen een aanpak; het is het kloppende hart van moderne industriële prestaties.",
-                contactTitle: "Neem contact met ons op",
-                nameLabel: "Naam:",
-                emailLabel: "E-mail:",
-                messageLabel: "Bericht:",
-                sendButton: "Verzenden",
-                footer: "© Alle rechten voorbehouden WKW Verbeteringsafdeling"
+                heroTitle: "WKW Abteilung für kontinuierliche Verbesserung",
+                heroSubtitle: "Kontinuierliche Verbesserung ist mehr als nur ein Ansatz; sie ist das schlagende Herz moderner industrieller Leistung.",
+                contactTitle: "Kontaktieren Sie uns",
+                nameLabel: "Name:",
+                emailLabel: "E-Mail:",
+                messageLabel: "Nachricht:",
+                sendButton: "Senden",
+                footer: "© Alle Rechte vorbehalten WKW Verbesserungsabteilung"
             }
         };
 
@@ -641,14 +641,14 @@
 
         if (localStorage.getItem('nightMode') === 'enabled') {
             body.classList.add('night-mode');
-            toggleButton.innerHTML = translations[savedLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("Nacht", "Dag").replace("ليلي", "نهاري");
+            toggleButton.innerHTML = translations[savedLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("ليلي", "نهاري").replace("Nacht", "Tag");
         }
 
         toggleButton.addEventListener('click', () => {
             body.classList.toggle('night-mode');
             const currentLang = document.documentElement.lang;
             if (body.classList.contains('night-mode')) {
-                toggleButton.innerHTML = translations[currentLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("Nacht", "Dag").replace("ليلي", "نهاري");
+                toggleButton.innerHTML = translations[currentLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("ليلي", "نهاري").replace("Nacht", "Tag");
                 localStorage.setItem('nightMode', 'enabled');
             } else {
                 toggleButton.innerHTML = translations[currentLang].nightMode;
