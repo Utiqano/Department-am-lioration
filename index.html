@@ -42,6 +42,11 @@
             overflow-x: hidden;
         }
 
+        body[lang="ar"] {
+            direction: rtl;
+            text-align: right;
+        }
+
         .navbar {
             background: var(--navbar-bg);
             padding: 1rem 1.5rem;
@@ -93,7 +98,7 @@
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
         }
 
-        .navbar .night-mode-toggle {
+        .navbar .night-mode-toggle, .navbar .language-toggle {
             background: var(--gradient-bg);
             border: none;
             padding: 0.75rem 1rem;
@@ -108,7 +113,7 @@
             margin: 0.25rem 0;
         }
 
-        .navbar .night-mode-toggle:hover {
+        .navbar .night-mode-toggle:hover, .navbar .language-toggle:hover {
             transform: scale(1.05);
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
         }
@@ -324,7 +329,7 @@
         }
 
         @media (max-width: 992px) {
-            .navbar-nav .nav-link, .navbar .night-mode-toggle {
+            .navbar-nav .nav-link, .navbar .night-mode-toggle, .navbar .language-toggle {
                 padding: 0.6rem 0.8rem !important;
                 font-size: 0.85rem;
             }
@@ -360,7 +365,7 @@
             .contact-form {
                 padding: 1.5rem;
             }
-            .navbar-nav .nav-link, .navbar .night-mode-toggle {
+            .navbar-nav .nav-link, .navbar .night-mode-toggle, .navbar .language-toggle {
                 padding: 0.5rem 0.75rem !important;
                 font-size: 0.8rem;
             }
@@ -389,7 +394,7 @@
                 font-size: 0.85rem;
                 padding: 1rem;
             }
-            .navbar-nav .nav-link, .navbar .night-mode-toggle {
+            .navbar-nav .nav-link, .navbar .night-mode-toggle, .navbar .language-toggle {
                 padding: 0.4rem 0.6rem !important;
                 font-size: 0.75rem;
             }
@@ -420,10 +425,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#accueil">Accueil</a>
+                        <a class="nav-link" href="#accueil" data-lang-key="home">Accueil</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="performanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="performanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-lang-key="performance">
                             Performance
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="performanceDropdown">
@@ -440,7 +445,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-lang-key="resources">
                             Ressources
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
@@ -459,10 +464,21 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact" id="contactToggle" data-bs-toggle="collapse" data-bs-target="#contactSection">Contact</a>
+                        <a class="nav-link" href="#contact" id="contactToggle" data-bs-toggle="collapse" data-bs-target="#contactSection" data-lang-key="contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link night-mode-toggle" id="nightModeToggle">Mode Nuit</button>
+                        <button class="nav-link night-mode-toggle" id="nightModeToggle" data-lang-key="nightMode">Mode Nuit</button>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle language-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Langue
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('ar')">العربية</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('nl')">Nederlands</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -471,8 +487,8 @@
 
     <section id="accueil" class="section-container hero-section text-center">
         <div class="container">
-            <h1>Département Amélioration Continue WKW</h1>
-            <h3>L’amélioration continue est bien plus qu’une simple démarche; c’est le cœur battant de la performance industrielle moderne.</h3>
+            <h1 data-lang-key="heroTitle">Département Amélioration Continue WKW</h1>
+            <h3 data-lang-key="heroSubtitle">L’amélioration continue est bien plus qu’une simple démarche; c’est le cœur battant de la performance industrielle moderne.</h3>
             <div class="center-image">
                 <img src="https://media.licdn.com/dms/image/v2/C510BAQFv4NwvhYRq8Q/company-logo_200_200/company-logo_200_200/0/1631351838133?e=2147483647&v=beta&t=pE5-TQRX2fd9oIfzQypoBLterLoj-X4wOnC3C8MMI4Q" alt="WKW Group Logo">
             </div>
@@ -503,33 +519,119 @@
     <section id="contact" class="section-container container">
         <div class="collapse" id="contactSection">
             <div class="contact-form">
-                <h2 class="text-center mb-4">Contactez-nous</h2>
+                <h2 class="text-center mb-4" data-lang-key="contactTitle">Contactez-nous</h2>
                 <form id="contactForm">
                     <div class="form-group">
-                        <label for="name">Nom:</label>
+                        <label for="name" data-lang-key="nameLabel">Nom:</label>
                         <input type="text" id="name" name="name" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
+                        <label for="email" data-lang-key="emailLabel">Email:</label>
                         <input type="email" id="email" name="email" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message:</label>
+                        <label for="message" data-lang-key="messageLabel">Message:</label>
                         <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                        <button type="submit" class="btn btn-primary" data-lang-key="sendButton">Envoyer</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer>
+    <footer data-lang-key="footer">
         © جميع الحقوق محفوظة WKW Amélioration Département <i class="fas fa-cogs"></i>
     </footer>
 
     <script>
+        const translations = {
+            fr: {
+                home: "Accueil",
+                performance: "Performance",
+                resources: "Ressources",
+                contact: "Contact",
+                nightMode: "Mode Nuit",
+                heroTitle: "Département Amélioration Continue WKW",
+                heroSubtitle: "L’amélioration continue est bien plus qu’une simple démarche; c’est le cœur battant de la performance industrielle moderne.",
+                contactTitle: "Contactez-nous",
+                nameLabel: "Nom:",
+                emailLabel: "Email:",
+                messageLabel: "Message:",
+                sendButton: "Envoyer",
+                footer: "© Tous droits réservés WKW Amélioration Département"
+            },
+            ar: {
+                home: "الرئيسية",
+                performance: "الأداء",
+                resources: "الموارد",
+                contact: "اتصل بنا",
+                nightMode: "الوضع الليلي",
+                heroTitle: "قسم التحسين المستمر WKW",
+                heroSubtitle: "التحسين المستمر هو أكثر من مجرد نهج؛ إنه قلب الأداء الصناعي الحديث النابض.",
+                contactTitle: "اتصل بنا",
+                nameLabel: "الاسم:",
+                emailLabel: "البريد الإلكتروني:",
+                messageLabel: "الرسالة:",
+                sendButton: "إرسال",
+                footer: "© جميع الحقوق محفوظة قسم التحسين WKW"
+            },
+            en: {
+                home: "Home",
+                performance: "Performance",
+                resources: "Resources",
+                contact: "Contact",
+                nightMode: "Night Mode",
+                heroTitle: "WKW Continuous Improvement Department",
+                heroSubtitle: "Continuous improvement is more than just an approach; it’s the beating heart of modern industrial performance.",
+                contactTitle: "Contact Us",
+                nameLabel: "Name:",
+                emailLabel: "Email:",
+                messageLabel: "Message:",
+                sendButton: "Send",
+                footer: "© All rights reserved WKW Improvement Department"
+            },
+            nl: {
+                home: "Home",
+                performance: "Prestaties",
+                resources: "Bronnen",
+                contact: "Contact",
+                nightMode: "Nachtmodus",
+                heroTitle: "WKW Afdeling Continue Verbetering",
+                heroSubtitle: "Continue verbetering is meer dan alleen een aanpak; het is het kloppende hart van moderne industriële prestaties.",
+                contactTitle: "Neem contact met ons op",
+                nameLabel: "Naam:",
+                emailLabel: "E-mail:",
+                messageLabel: "Bericht:",
+                sendButton: "Verzenden",
+                footer: "© Alle rechten voorbehouden WKW Verbeteringsafdeling"
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.body.setAttribute('lang', lang);
+
+            // Update all elements with data-lang-key
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key] + (element.tagName === 'FOOTER' ? ' <i class="fas fa-cogs"></i>' : '');
+                }
+            });
+
+            // Adjust navbar brand if needed (keeping it static here)
+            document.querySelector('.navbar-brand').textContent = "WKW AUTOMOTIVE";
+
+            // Store language preference
+            localStorage.setItem('language', lang);
+        }
+
+        // Load saved language or default to French
+        const savedLang = localStorage.getItem('language') || 'fr';
+        changeLanguage(savedLang);
+
         const ADMIN_PASSWORD = "admin123";
         let isAuthenticated = false;
 
@@ -539,16 +641,17 @@
 
         if (localStorage.getItem('nightMode') === 'enabled') {
             body.classList.add('night-mode');
-            toggleButton.textContent = 'Mode Jour';
+            toggleButton.innerHTML = translations[savedLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("Nacht", "Dag").replace("ليلي", "نهاري");
         }
 
         toggleButton.addEventListener('click', () => {
             body.classList.toggle('night-mode');
+            const currentLang = document.documentElement.lang;
             if (body.classList.contains('night-mode')) {
-                toggleButton.textContent = 'Mode Jour';
+                toggleButton.innerHTML = translations[currentLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("Nacht", "Dag").replace("ليلي", "نهاري");
                 localStorage.setItem('nightMode', 'enabled');
             } else {
-                toggleButton.textContent = 'Mode Nuit';
+                toggleButton.innerHTML = translations[currentLang].nightMode;
                 localStorage.setItem('nightMode', 'disabled');
             }
         });
@@ -649,4 +752,4 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-                                                               </html>
+</html>
