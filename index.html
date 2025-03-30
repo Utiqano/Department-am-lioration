@@ -159,12 +159,18 @@
 
         .hero-section h3 {
             font-size: 1.2rem;
-            font-weight: 400;
+            font-weight: 600; /* Bolder for emphasis */
             max-width: 90%;
             margin: 1rem auto;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeSlideUp 1s ease-out 0.6s forwards;
+            color: var(--text-color);
+            text-shadow: 0 0 5px rgba(220, 20, 60, 0.5); /* Subtle glow */
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); /* Gradient background */
+            -webkit-background-clip: text; /* Gradient text effect */
+            background-clip: text;
+            color: transparent; /* Makes text use gradient */
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            animation: conveyorText 12s ease-in-out infinite; /* Styled continuous animation */
         }
 
         .center-image img {
@@ -184,15 +190,16 @@
             100% { opacity: 1; transform: translateX(0) rotate(0deg); }
         }
 
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
         @keyframes spinIn {
             0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
             50% { transform: scale(1.1) rotate(180deg); }
             100% { opacity: 1; transform: scale(1) rotate(360deg); }
+        }
+
+        @keyframes conveyorText {
+            0% { transform: translateX(30px); opacity: 0.9; text-shadow: 0 0 5px rgba(220, 20, 60, 0.5); }
+            50% { transform: translateX(-30px); opacity: 1; text-shadow: 0 0 10px rgba(220, 20, 60, 0.7); }
+            100% { transform: translateX(30px); opacity: 0.9; text-shadow: 0 0 5px rgba(220, 20, 60, 0.5); }
         }
 
         .section-container {
@@ -302,12 +309,6 @@
 
         footer i:hover {
             transform: scale(1.2);
-        }
-
-        @keyframes conveyorText {
-            0% { transform: translateX(20px); opacity: 0.8; }
-            50% { transform: translateX(-20px); opacity: 1; }
-            100% { transform: translateX(20px); opacity: 0.8; }
         }
 
         @keyframes gearSpin {
@@ -645,4 +646,4 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-                                    </html>
+                                                                                                                                      </html>
