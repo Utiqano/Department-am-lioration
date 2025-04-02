@@ -57,8 +57,7 @@
             box-shadow: var(--shadow);
             backdrop-filter: blur(5px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            animation: fadeInDown 0.8s ease forwards;
+            opacity: 1;
         }
 
         .navbar.scrolled {
@@ -73,6 +72,7 @@
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
+            cursor: pointer;
         }
 
         .navbar-nav .nav-link {
@@ -83,23 +83,6 @@
             border-radius: 25px;
             text-transform: uppercase;
             font-size: 0.9rem;
-            position: relative;
-        }
-
-        .navbar-nav .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background: #fff;
-            transition: var(--transition);
-        }
-
-        .navbar-nav .nav-link:hover::after {
-            width: 80%;
-            left: 10%;
         }
 
         .navbar-nav .nav-link:hover {
@@ -114,6 +97,7 @@
             border-radius: 25px;
             color: #fff;
             font-weight: 600;
+            cursor: pointer;
         }
 
         .hero-section {
@@ -141,8 +125,7 @@
             font-size: 2.8rem;
             font-weight: 900;
             letter-spacing: 1.5px;
-            opacity: 0;
-            animation: bounceIn 1s ease 0.2s forwards;
+            animation: fadeInDown 0.8s ease forwards;
         }
 
         .hero-section h3 {
@@ -151,8 +134,8 @@
             max-width: 90%;
             margin: 1rem auto;
             color: var(--text-color);
+            animation: fadeInDown 1s ease forwards 0.2s;
             opacity: 0;
-            animation: bounceIn 1s ease 0.4s forwards;
         }
 
         .center-image img {
@@ -160,8 +143,8 @@
             border-radius: 50%;
             border: 5px solid rgba(255, 255, 255, 0.3);
             box-shadow: var(--shadow);
+            animation: bounceIn 1.2s ease forwards 0.4s;
             opacity: 0;
-            animation: bounceIn 1s ease 0.6s forwards;
         }
 
         @keyframes fadeInDown {
@@ -186,40 +169,12 @@
             padding: 0.8rem 1.8rem;
             border-radius: 10px;
             font-weight: 500;
-            box-shadow: 0 4px 10px rgba(0, 0,  полный текст0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: var(--transition);
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .btn-primary:hover {
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.95);
-            animation: glow 0.5s ease;
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px rgba(230, 57, 70, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(230, 57, 70, 0.8); }
-            100% { box-shadow: 0 0 5px rgba(230, 57, 70, 0.5); }
         }
 
         .sidebar {
@@ -231,7 +186,7 @@
             background: linear-gradient(180deg, rgba(29, 53, 87, 0.95), rgba(42, 42, 42, 0.95));
             color: var(--text-color);
             box-shadow: var(--shadow);
-            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: left 0.5s ease;
             z-index: 2000;
             border-radius: 0 15px 15px 0;
         }
@@ -242,31 +197,12 @@
 
         .sidebar-content {
             padding: 2rem;
-            opacity: 0;
-            animation: fadeIn 0.5s ease 0.2s forwards;
         }
 
         .sidebar-content h2 {
             color: var(--primary-color);
             font-size: 2rem;
             font-weight: 700;
-        }
-
-        .sidebar::after {
-            content: '\f013';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            font-size: 5rem;
-            color: rgba(230, 57, 70, 0.1);
-            animation: gearSpin 10s linear infinite;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
         }
 
         .percentage-alert {
@@ -276,13 +212,6 @@
             box-shadow: var(--shadow), inset 0 0 15px rgba(230, 57, 70, 0.3);
             border: 3px solid var(--primary-color);
             text-align: center;
-            position: relative;
-            opacity: 0;
-            transform: scale(0.5) rotate(0deg);
-        }
-
-        .percentage-alert.active {
-            animation: zoomSpin 0.8s ease forwards;
         }
 
         .percentage-circle {
@@ -307,7 +236,6 @@
             stroke: url(#gradientStroke);
             stroke-dasharray: 0 471;
             transition: stroke-dasharray 1.5s ease;
-            filter: drop-shadow(0 0 5px rgba(230, 57, 70, 0.5));
         }
 
         .percentage-circle .value {
@@ -317,21 +245,6 @@
             transform: translate(-50%, -50%);
             font-size: 2.8rem;
             font-weight: 800;
-            opacity: 0;
-            animation: fadePop 0.6s ease 0.8s forwards;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            z-index: 10; /* Ensure value is above the circle */
-        }
-
-        @keyframes zoomSpin {
-            0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
-            70% { opacity: 1; transform: scale(1.1) rotate(360deg); }
-            100% { opacity: 1; transform: scale(1) rotate(360deg); }
-        }
-
-        @keyframes fadePop {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
         footer {
@@ -340,17 +253,6 @@
             padding: 2rem;
             position: relative;
             overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 20"><path fill="%231d3557" d="M0,0C240,20,480,20,720,0C960,20,1200,20,1440,0V20H0Z"/></svg>');
-            animation: wave 5s linear infinite;
         }
 
         footer .gear-cluster {
@@ -364,11 +266,6 @@
             animation: gearSpin 4s linear infinite;
         }
 
-        @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-1440px); }
-        }
-
         @keyframes gearSpin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -376,14 +273,6 @@
 
         .section-container {
             padding: 3rem 0;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .section-container.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         @media (max-width: 768px) {
@@ -441,14 +330,14 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="performanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-lang-key="performance">Performance</a>
                         <ul class="dropdown-menu" aria-labelledby="performanceDropdown">
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S UAP1" data-percentage="80%">Taux 5S UAP1</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba UAP1" data-percentage="81%">Taux Gemba UAP1</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S Logistique" data-percentage="80%">Taux 5S Logistique</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba Logistique" data-percentage="75%">Taux Gemba Logistique</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S Usine" data-percentage="79%">Taux 5S Usine</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba Usine" data-percentage="78%">Taux Gemba Usine</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S UAP2" data-percentage="77%">Taux 5S UAP2</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba UAP2" data-percentage="74%">Taux Gemba UAP2</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S UAP1" data-percentage="80">Taux 5S UAP1</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba UAP1" data-percentage="81">Taux Gemba UAP1</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S Logistique" data-percentage="80">Taux 5S Logistique</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba Logistique" data-percentage="75">Taux Gemba Logistique</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S Usine" data-percentage="79">Taux 5S Usine</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba Usine" data-percentage="78">Taux Gemba Usine</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S UAP2" data-percentage="77">Taux 5S UAP2</a></li>
+                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba UAP2" data-percentage="74">Taux Gemba UAP2</a></li>
                             <li><a class="dropdown-item" href="https://www.google.com" target="_blank">Plan d'action Gemba</a></li>
                             <li><a class="dropdown-item" href="https://www.yahoo.com" target="_blank">Plan d'action 5S</a></li>
                         </ul>
@@ -576,7 +465,7 @@
             document.body.setAttribute('lang', lang);
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.getAttribute('data-lang-key');
-                if (translations[lang][key]) element.innerHTML = key === 'footer' ? translations[lang][key] : translations[lang][key];
+                if (translations[lang][key]) element.innerHTML = translations[lang][key];
             });
             document.querySelector('.navbar-brand').textContent = "WKW AUTOMOTIVE";
             localStorage.setItem('language', lang);
@@ -585,107 +474,102 @@
         const savedLang = localStorage.getItem('language') || 'fr';
         changeLanguage(savedLang);
 
-        const ADMIN_PASSWORD = "admin123";
-        let isAuthenticated = false;
-
+        // Night mode toggle
         const toggleButton = document.getElementById('nightModeToggle');
         const body = document.body;
-        const navbar = document.querySelector('.navbar');
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('night-mode');
+            const isNightMode = body.classList.contains('night-mode');
+            toggleButton.textContent = isNightMode ? 'Mode Jour' : 'Mode Nuit';
+            localStorage.setItem('nightMode', isNightMode ? 'enabled' : 'disabled');
+        });
 
         if (localStorage.getItem('nightMode') === 'enabled') {
             body.classList.add('night-mode');
-            toggleButton.innerHTML = translations[savedLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("ليلي", "نهاري").replace("Nacht", "Tag");
+            toggleButton.textContent = 'Mode Jour';
         }
 
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('night-mode');
-            const currentLang = document.documentElement.lang;
-            toggleButton.innerHTML = body.classList.contains('night-mode') ? 
-                translations[currentLang].nightMode.replace("Nuit", "Jour").replace("Night", "Day").replace("ليلي", "نهاري").replace("Nacht", "Tag") : 
-                translations[currentLang].nightMode;
-            localStorage.setItem('nightMode', body.classList.contains('night-mode') ? 'enabled' : 'disabled');
-        });
+        // Password protection for Performance dropdown
+        const ADMIN_PASSWORD = 'admin123';
+        let isAuthenticated = false;
 
-        function showPercentage(title, percentage) {
-            const section = document.getElementById('percentageResult');
-            const percentageValue = document.getElementById('percentageValue');
-            const progressCircle = document.querySelector('.percentage-circle .progress');
-            const alert = document.querySelector('.percentage-alert');
-            const numericValue = parseFloat(percentage);
-
-            // Reset state fully
-            section.style.display = 'none'; // Hide first to reset
-            alert.classList.remove('active');
-            percentageValue.style.opacity = '0'; // Explicitly hide value
-            percentageValue.style.animation = 'none';
-            progressCircle.style.strokeDasharray = '0 471';
-            void alert.offsetWidth; // Trigger reflow
-
-            // Set content
-            document.getElementById('percentageTitle').innerText = title;
-            percentageValue.innerText = percentage;
-
-            // Set color based on value
-            if (numericValue >= 0 && numericValue <= 74) percentageValue.style.color = 'var(--red-color)';
-            else if (numericValue >= 75 && numericValue <= 89) percentageValue.style.color = 'var(--orange-color)';
-            else if (numericValue >= 90 && numericValue <= 100) percentageValue.style.color = 'var(--green-color)';
-
-            // Animate progress circle
-            const dashArray = (numericValue / 100) * 471;
-            progressCircle.style.strokeDasharray = `${dashArray} 471`;
-
-            // Show and animate
-            section.style.display = 'block';
-            alert.classList.add('active');
-            percentageValue.style.animation = 'fadePop 0.6s ease 0.8s forwards'; // Reapply animation
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Handle percentage item clicks
-        document.querySelectorAll('.percentage-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                const title = item.getAttribute('data-title');
-                const percentage = item.getAttribute('data-percentage');
-                showPercentage(title, percentage);
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-            document.querySelectorAll('.section-container').forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) section.classList.add('visible');
-            });
-        });
-
-        document.getElementById('performanceDropdown').addEventListener('click', function(e) {
-            e.preventDefault();
+        const performanceDropdown = document.getElementById('performanceDropdown');
+        performanceDropdown.addEventListener('click', (e) => {
             if (!isAuthenticated) {
-                const password = prompt("Veuillez entrer le mot de passe administrateur :");
+                e.preventDefault();
+                const password = prompt('Entrez le mot de passe pour accéder à la section Performance:');
                 if (password === ADMIN_PASSWORD) {
                     isAuthenticated = true;
-                    alert("Accès autorisé !");
-                    const dropdown = new bootstrap.Dropdown(this);
-                    dropdown.show();
-                } else {
-                    alert("Mot de passe incorrect !");
-                    const dropdown = new bootstrap.Dropdown(this);
-                    dropdown.hide();
+                    const dropdown = new bootstrap.Dropdown(performanceDropdown);
+                    dropdown.toggle(); // Manually open the dropdown
+                } else if (password !== null) { // Check if user didn't cancel
+                    alert('Mot de passe incorrect!');
                 }
             }
         });
 
+        // Percentage display function
+        function showPercentage(title, percentage) {
+            const section = document.getElementById('percentageResult');
+            const percentageValue = document.getElementById('percentageValue');
+            const progressCircle = document.querySelector('.percentage-circle .progress');
+            const numericValue = parseFloat(percentage);
+
+            document.getElementById('percentageTitle').textContent = title;
+            percentageValue.textContent = percentage + '%';
+
+            if (numericValue <= 74) percentageValue.style.color = 'var(--red-color)';
+            else if (numericValue <= 89) percentageValue.style.color = 'var(--orange-color)';
+            else percentageValue.style.color = 'var(--green-color)';
+
+            const dashArray = (numericValue / 100) * 471;
+            progressCircle.style.strokeDasharray = `${dashArray} 471`;
+
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Percentage item click handlers (only work if authenticated)
+        document.querySelectorAll('.percentage-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isAuthenticated) {
+                    const title = item.getAttribute('data-title');
+                    const percentage = item.getAttribute('data-percentage');
+                    showPercentage(title, percentage);
+                }
+            });
+        });
+
+        // Sidebar toggle
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        sidebarToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            sidebar.classList.toggle('active');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Contact section toggle
         document.getElementById('contactToggle').addEventListener('click', function(e) {
             e.preventDefault();
             const contactSection = document.getElementById('contactSection');
-            const form = contactSection.querySelector('.contact-form');
             const collapse = new bootstrap.Collapse(contactSection, { toggle: true });
-            contactSection.addEventListener('shown.bs.collapse', () => form.classList.add('show'));
-            contactSection.addEventListener('hidden.bs.collapse', () => form.classList.remove('show'));
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         });
 
+        // Video modal
         document.querySelectorAll('[data-bs-toggle="modal"]').forEach(link => {
             link.addEventListener('click', e => {
                 const videoSrc = e.target.getAttribute('data-video');
@@ -693,6 +577,7 @@
             });
         });
 
+        // Contact form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             emailjs.sendForm('service_bvzi4ft', 'template_py9w0zf', this)
@@ -702,38 +587,6 @@
                 }, (error) => {
                     alert('Erreur lors de l\'envoi du message: ' + error.text);
                 });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(targetId);
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        const sidebar = document.getElementById('sidebar');
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const closeSidebar = document.getElementById('closeSidebar');
-
-        sidebarToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            sidebar.classList.toggle('active');
-            body.classList.toggle('sidebar-open');
-        });
-
-        closeSidebar.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            body.classList.remove('sidebar-open');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                body.classList.remove('sidebar-open');
-            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
