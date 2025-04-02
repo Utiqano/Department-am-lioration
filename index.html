@@ -186,7 +186,7 @@
             padding: 0.8rem 1.8rem;
             border-radius: 10px;
             font-weight: 500;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0,  полный текст0, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -449,7 +449,6 @@
                             <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba Usine" data-percentage="78%">Taux Gemba Usine</a></li>
                             <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S UAP2" data-percentage="77%">Taux 5S UAP2</a></li>
                             <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba UAP2" data-percentage="74%">Taux Gemba UAP2</a></li>
-                            <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Example" data-percentage="70%">Taux Example</a></li>
                             <li><a class="dropdown-item" href="https://www.google.com" target="_blank">Plan d'action Gemba</a></li>
                             <li><a class="dropdown-item" href="https://www.yahoo.com" target="_blank">Plan d'action 5S</a></li>
                         </ul>
@@ -661,8 +660,8 @@
         });
 
         document.getElementById('performanceDropdown').addEventListener('click', function(e) {
+            e.preventDefault();
             if (!isAuthenticated) {
-                e.preventDefault();
                 const password = prompt("Veuillez entrer le mot de passe administrateur :");
                 if (password === ADMIN_PASSWORD) {
                     isAuthenticated = true;
@@ -671,6 +670,8 @@
                     dropdown.show();
                 } else {
                     alert("Mot de passe incorrect !");
+                    const dropdown = new bootstrap.Dropdown(this);
+                    dropdown.hide();
                 }
             }
         });
