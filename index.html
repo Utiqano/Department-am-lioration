@@ -275,6 +275,34 @@
             padding: 3rem 0;
         }
 
+        #messagesContainer .message-card {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        #messagesContainer .message-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #messagesContainer .message-card h5 {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        #messagesContainer .message-card p {
+            margin: 0.5rem 0;
+        }
+
+        .night-mode #messagesContainer .message-card {
+            background: var(--dark-bg);
+            color: var(--text-color);
+        }
+
         @media (max-width: 768px) {
             .hero-section h1 { font-size: 2.2rem; }
             .hero-section h3 { font-size: 1.2rem; }
@@ -293,16 +321,20 @@
             .percentage-circle .value { font-size: 1.8rem; }
         }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-       (function(){
-          if (typeof emailjs === 'undefined') {
-              console.error("EmailJS library failed to load.");
-          } else {
-              emailjs.init({ publicKey: "jKtrpo8v9_58AS4y8" });
-          }
-       })();
+    <!-- Load Firebase SDK modularly -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js';
+        import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js';
+
+        // Make Firebase available globally for initFirebase
+        window.firebase = { initializeApp, getAnalytics, getDatabase, ref, set, onValue };
     </script>
+    <!-- Fallback for non-module environments -->
+    <script nomodule src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script nomodule src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
+    <script nomodule src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
 </head>
 <body>
     <div id="sidebar" class="sidebar">
@@ -338,20 +370,16 @@
                             <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba Usine" data-percentage="78">Taux Gemba Usine</a></li>
                             <li><a class="dropdown-item percentage-item" href="#" data-title="Taux 5S UAP2" data-percentage="77">Taux 5S UAP2</a></li>
                             <li><a class="dropdown-item percentage-item" href="#" data-title="Taux Gemba UAP2" data-percentage="75">Taux Gemba UAP2</a></li>
-                            <li><a class="dropdown-item" href=https://wkwgroup-my.sharepoint.com/:x:/r/personal/houssine_trabelsi_wkw-group_com/Documents/App%20PDF/Plan%20d%27action%20ligne%20app.xlsx?d=w1a2ebd41f88f4be0a6c87bf03ade0b8b&csf=1&web=1&e=eFZxtB" target="_blank">Plan d'action Gemba</a></li>
+                            <li><a class="dropdown-item" href="https://wkwgroup-my.sharepoint.com/:x:/r/personal/houssine_trabelsi_wkw-group_com/Documents/App%20PDF/Plan%20d%27action%20ligne%20app.xlsx?d=w1a2ebd41f88f4be0a6c87bf03ade0b8b&csf=1&web=1&e=eFZxtB" target="_blank">Plan d'action Gemba</a></li>
                             <li><a class="dropdown-item" href="https://wkwgroup-my.sharepoint.com/:x:/r/personal/houssine_trabelsi_wkw-group_com/Documents/App%20PDF/Plan%20d%27action%205%20S%20app.xlsx?d=w7a7dfb3415884b3290dbfe066805cf20&csf=1&web=1&e=xmDan6" target="_blank">Plan d'action 5S</a></li>
-                              <li><a class="dropdown-item" href="https://wkwgroup-my.sharepoint.com/:x:/r/personal/houssine_trabelsi_wkw-group_com/Documents/App%20PDF/suivi%20mensuel%20Gemba%20et%205S.xlsx?d=wd411a7fafa334d068ef6d48acc6efb4f&csf=1&web=1&e=ed2hQ2" target="_blank">Suivi mensuel Gemba et 5S</a></li>
+                            <li><a class="dropdown-item" href="https://wkwgroup-my.sharepoint.com/:x:/r/personal/houssine_trabelsi_wkw-group_com/Documents/App%20PDF/suivi%20mensuel%20Gemba%20et%205S.xlsx?d=wd411a7fafa334d068ef6d48acc6efb4f&csf=1&web=1&e=ed2hQ2" target="_blank">Suivi mensuel Gemba et 5S</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-lang-key="resources">Ressources</a>
                         <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
                             <li><a class="dropdown-item" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUM1hRVVYyQ0hBOFpGQ1lGMlgzSkpNS1BETC4u&route=shorturl" target="_blank">Audit Gemba OJT Ligne</a></li>
-                               <li><a class="dropdown-item" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUNEEyWERCWlhKUEs4NzNSQ0k1NUwxRUhHMS4u"_blank">Propositions d'amélioration</a></li>
-                              
-                              
-                              
-                              
+                            <li><a class="dropdown-item" href="https://forms.office.com/Pages/ResponsePage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUNEEyWERCWlhKUEs4NzNSQ0k1NUwxRUhHMS4u" target="_blank">Propositions d'amélioration</a></li>
                             <li><a class="dropdown-item" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUMDVBQkVHM002WUhaNUdINVpaTFpTTTVSRC4u&route=shorturl" target="_blank">Audit Gemba Mur Qualité</a></li>
                             <li><a class="dropdown-item" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRURjJOMUdPOVFXU1FUR0tCN09WQTdJWVdHRS4u&route=shorturl" target="_blank">Audit Gemba Magasin</a></li>
                             <li><a class="dropdown-item" href="https://forms.office.com/pages/responsepage.aspx?id=Yy2gqiIfe0W77Avd4jtr3wM3f1Qll_xKkMAzfzJQ_BRUNzQ4MldBM0dTVzc0MFRHVlc0UlU2VE9QRi4u&route=shorturl" target="_blank">Audit 5S</a></li>
@@ -366,6 +394,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#contact" id="contactToggle" data-bs-toggle="collapse" data-bs-target="#contactSection" data-lang-key="contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contactList" id="messagesToggle" data-lang-key="messages">Messages Reçus</a></li>
                     <li class="nav-item"><button class="nav-link night-mode-toggle" id="nightModeToggle" data-lang-key="nightMode">Mode Nuit</button></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle language-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Langue</a>
@@ -418,7 +447,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe id="videoPlayer" width="100%" height="300" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe id="videoPlayer" width="100%" height="300" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -449,6 +478,13 @@
         </div>
     </section>
 
+    <section id="contactList" class="section-container container" style="display: none;">
+        <h2 class="text-center mb-4">Messages Reçus</h2>
+        <div id="messagesContainer" class="row">
+            <!-- Messages will be dynamically inserted here -->
+        </div>
+    </section>
+
     <footer data-lang-key="footer">
         <span>© جميع الحقوق محفوظة WKW Amélioration Département</span>
         <div class="gear-cluster">
@@ -460,10 +496,10 @@
 
     <script>
         const translations = {
-            fr: { home: "Accueil", performance: "Performance", resources: "Ressources", contact: "Contact", nightMode: "Mode Nuit", heroTitle: "Département Amélioration Continue WKW", heroSubtitle: "L’amélioration continue est bien plus qu’une simple démarche; c’est le cœur battant de la performance industrielle moderne.", contactTitle: "Contactez-nous", nameLabel: "Nom:", emailLabel: "Email:", messageLabel: "Message:", sendButton: "Envoyer", footer: "© Tous droits réservés WKW Amélioration Département" },
-            ar: { home: "الرئيسية", performance: "الأداء", resources: "الموارد", contact: "اتصل بنا", nightMode: "الوضع الليلي", heroTitle: "قسم التحسين المستمر WKW", heroSubtitle: "التحسين المستمر هو أكثر من مجرد نهج؛ إنه قلب الأداء الصناعي الحديث النابض.", contactTitle: "اتصل بنا", nameLabel: "الاسم:", emailLabel: "البريد الإلكتروني:", messageLabel: "الرسالة:", sendButton: "إرسال", footer: "© جميع الحقوق محفوظة قسم التحسين WKW" },
-            en: { home: "Home", performance: "Performance", resources: "Resources", contact: "Contact", nightMode: "Night Mode", heroTitle: "WKW Continuous Improvement Department", heroSubtitle: "Continuous improvement is more than just an approach; it’s the beating heart of modern industrial performance.", contactTitle: "Contact Us", nameLabel: "Name:", emailLabel: "Email:", messageLabel: "Message:", sendButton: "Send", footer: "© All rights reserved WKW Improvement Department" },
-            de: { home: "Startseite", performance: "Leistung", resources: "Ressourcen", contact: "Kontakt", nightMode: "Nachtmodus", heroTitle: "WKW Abteilung für kontinuierliche Verbesserung", heroSubtitle: "Kontinuierliche Verbesserung ist mehr als nur ein Ansatz; sie ist das schlagende Herz moderner industrieller Leistung.", contactTitle: "Kontaktieren Sie uns", nameLabel: "Name:", emailLabel: "E-Mail:", messageLabel: "Nachricht:", sendButton: "Senden", footer: "© Alle Rechte vorbehalten WKW Verbesserungsabteilung" }
+            fr: { home: "Accueil", performance: "Performance", resources: "Ressources", contact: "Contact", messages: "Messages Reçus", nightMode: "Mode Nuit", heroTitle: "Département Amélioration Continue WKW", heroSubtitle: "L’amélioration continue est bien plus qu’une simple démarche; c’est le cœur battant de la performance industrielle moderne.", contactTitle: "Contactez-nous", nameLabel: "Nom:", emailLabel: "Email:", messageLabel: "Message:", sendButton: "Envoyer", footer: "© Tous droits réservés WKW Amélioration Département" },
+            ar: { home: "الرئيسية", performance: "الأداء", resources: "الموارد", contact: "اتصل بنا", messages: "الرسائل المستلمة", nightMode: "الوضع الليلي", heroTitle: "قسم التحسين المستمر WKW", heroSubtitle: "التحسين المستمر هو أكثر من مجرد نهج؛ إنه قلب الأداء الصناعي الحديث النابض.", contactTitle: "اتصل بنا", nameLabel: "الاسم:", emailLabel: "البريد الإلكتروني:", messageLabel: "الرسالة:", sendButton: "إرسال", footer: "© جميع الحقوق محفوظة قسم التحسين WKW" },
+            en: { home: "Home", performance: "Performance", resources: "Resources", contact: "Contact", messages: "Received Messages", nightMode: "Night Mode", heroTitle: "WKW Continuous Improvement Department", heroSubtitle: "Continuous improvement is more than just an approach; it’s the beating heart of modern industrial performance.", contactTitle: "Contact Us", nameLabel: "Name:", emailLabel: "Email:", messageLabel: "Message:", sendButton: "Send", footer: "© All rights reserved WKW Improvement Department" },
+            de: { home: "Startseite", performance: "Leistung", resources: "Ressourcen", contact: "Kontakt", messages: "Empfangene Nachrichten", nightMode: "Nachtmodus", heroTitle: "WKW Abteilung für kontinuierliche Verbesserung", heroSubtitle: "Kontinuierliche Verbesserung ist mehr als nur ein Ansatz; sie ist das schlagende Herz moderner industrieller Leistung.", contactTitle: "Kontaktieren Sie uns", nameLabel: "Name:", emailLabel: "E-Mail:", messageLabel: "Nachricht:", sendButton: "Senden", footer: "© Alle Rechte vorbehalten WKW Verbesserungsabteilung" }
         };
 
         function changeLanguage(lang) {
@@ -474,47 +510,63 @@
                 if (translations[lang][key]) element.innerHTML = translations[lang][key];
             });
             document.querySelector('.navbar-brand').textContent = "WKW AUTOMOTIVE";
-            localStorage.setItem('language', lang);
+            try {
+                localStorage.setItem('language', lang);
+            } catch (e) {
+                console.warn('localStorage blocked:', e);
+            }
         }
 
-        const savedLang = localStorage.getItem('language') || 'fr';
+        function getLocalStorage(key, defaultValue) {
+            try {
+                return localStorage.getItem(key) || defaultValue;
+            } catch (e) {
+                console.warn('localStorage blocked:', e);
+                return defaultValue;
+            }
+        }
+
+        const savedLang = getLocalStorage('language', 'fr');
         changeLanguage(savedLang);
 
-        // Night mode toggle
         const toggleButton = document.getElementById('nightModeToggle');
         const body = document.body;
         toggleButton.addEventListener('click', () => {
             body.classList.toggle('night-mode');
             const isNightMode = body.classList.contains('night-mode');
             toggleButton.textContent = isNightMode ? 'Mode Jour' : 'Mode Nuit';
-            localStorage.setItem('nightMode', isNightMode ? 'enabled' : 'disabled');
+            try {
+                localStorage.setItem('nightMode', isNightMode ? 'enabled' : 'disabled');
+            } catch (e) {
+                console.warn('localStorage blocked:', e);
+            }
         });
 
-        if (localStorage.getItem('nightMode') === 'enabled') {
+        if (getLocalStorage('nightMode', 'disabled') === 'enabled') {
             body.classList.add('night-mode');
             toggleButton.textContent = 'Mode Jour';
         }
 
-        // Password protection for Performance dropdown
-        const ADMIN_PASSWORD = 'admin123';
-        let isAuthenticated = false;
+        const ADMIN_PASSWORD = 'admin123'; // For Performance section
+        const MESSAGES_PASSWORD = 'wkw123'; // For Messages Reçus
+        let isAuthenticatedPerformance = false;
+        let isAuthenticatedMessages = false;
 
         const performanceDropdown = document.getElementById('performanceDropdown');
         performanceDropdown.addEventListener('click', (e) => {
-            if (!isAuthenticated) {
+            if (!isAuthenticatedPerformance) {
                 e.preventDefault();
                 const password = prompt('Entrez le mot de passe pour accéder à la section Performance:');
                 if (password === ADMIN_PASSWORD) {
-                    isAuthenticated = true;
+                    isAuthenticatedPerformance = true;
                     const dropdown = new bootstrap.Dropdown(performanceDropdown);
-                    dropdown.toggle(); // Manually open the dropdown
-                } else if (password !== null) { // Check if user didn't cancel
+                    dropdown.toggle();
+                } else if (password !== null) {
                     alert('Mot de passe incorrect!');
                 }
             }
         });
 
-        // Percentage display function
         function showPercentage(title, percentage) {
             const section = document.getElementById('percentageResult');
             const percentageValue = document.getElementById('percentageValue');
@@ -535,11 +587,10 @@
             section.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Percentage item click handlers (only work if authenticated)
         document.querySelectorAll('.percentage-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (isAuthenticated) {
+                if (isAuthenticatedPerformance) {
                     const title = item.getAttribute('data-title');
                     const percentage = item.getAttribute('data-percentage');
                     showPercentage(title, percentage);
@@ -547,7 +598,26 @@
             });
         });
 
-        // Sidebar toggle
+        const messagesToggle = document.getElementById('messagesToggle');
+        messagesToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!isAuthenticatedMessages) {
+                const password = prompt('Entrez le mot de passe pour voir les messages reçus:');
+                if (password === MESSAGES_PASSWORD) {
+                    isAuthenticatedMessages = true;
+                    document.getElementById('contactList').style.display = 'block';
+                    document.getElementById('contactList').scrollIntoView({ behavior: 'smooth' });
+                    console.log('Messages section unlocked');
+                } else if (password !== null) {
+                    alert('Mot de passe incorrect!');
+                }
+            } else {
+                document.getElementById('contactList').style.display = 'block';
+                document.getElementById('contactList').scrollIntoView({ behavior: 'smooth' });
+                console.log('Messages section re-displayed');
+            }
+        });
+
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const closeSidebar = document.getElementById('closeSidebar');
@@ -567,7 +637,6 @@
             }
         });
 
-        // Contact section toggle
         document.getElementById('contactToggle').addEventListener('click', function(e) {
             e.preventDefault();
             const contactSection = document.getElementById('contactSection');
@@ -575,7 +644,6 @@
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Video modal
         document.querySelectorAll('[data-bs-toggle="modal"]').forEach(link => {
             link.addEventListener('click', e => {
                 const videoSrc = e.target.getAttribute('data-video');
@@ -583,16 +651,92 @@
             });
         });
 
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            emailjs.sendForm('service_bvzi4ft', 'template_py9w0zf', this)
-                .then(() => {
-                    alert('Message envoyé avec succès!');
-                    this.reset();
-                }, (error) => {
-                    alert('Erreur lors de l\'envoi du message: ' + error.text);
+        function initFirebase() {
+            const firebaseConfig = {
+                apiKey: "AIzaSyBRkQC9shy1T0wh3KGCLTT3d3OSsg-FnFI",
+                authDomain: "department-bf249.firebaseapp.com",
+                projectId: "department-bf249",
+                storageBucket: "department-bf249.firebasestorage.app",
+                messagingSenderId: "643353432987",
+                appId: "1:643353432987:web:ceefaa575238670768473e",
+                measurementId: "G-PP3HX954DM",
+                databaseURL: "https://department-bf249-default-rtdb.firebaseio.com/"
+            };
+
+            try {
+                const app = firebase.initializeApp(firebaseConfig);
+                const analytics = firebase.getAnalytics(app);
+                const database = firebase.getDatabase(app);
+                window.database = database;
+                console.log('Firebase initialized successfully');
+
+                document.getElementById('contactForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+
+                    const contactRef = firebase.ref(database, 'contacts/' + Date.now());
+                    firebase.set(contactRef, {
+                        name: name,
+                        email: email,
+                        message: message,
+                        timestamp: new Date().toISOString()
+                    })
+                    .then(() => {
+                        console.log('Message saved:', { name, email, message });
+                        alert('Message enregistré dans Firebase avec succès!');
+                        this.reset();
+                    })
+                    .catch((error) => {
+                        console.error('Error saving message:', error);
+                        alert('Erreur lors de l\'enregistrement: ' + error.message);
+                    });
                 });
+
+                const messagesContainer = document.getElementById('messagesContainer');
+                const messagesRef = firebase.ref(database, 'contacts');
+                firebase.onValue(messagesRef, (snapshot) => {
+                    console.log('Raw snapshot:', snapshot);
+                    console.log('Snapshot value:', snapshot.val());
+                    messagesContainer.innerHTML = '';
+                    const messages = snapshot.val();
+                    if (messages) {
+                        console.log('Messages found:', messages);
+                        Object.keys(messages).forEach((key) => {
+                            const msg = messages[key];
+                            console.log('Processing message:', msg);
+                            const messageCard = `
+                                <div class="col-md-4 message-card">
+                                    <h5>${msg.name || 'N/A'}</h5>
+                                    <p><strong>Email:</strong> ${msg.email || 'N/A'}</p>
+                                    <p><strong>Message:</strong> ${msg.message || 'N/A'}</p>
+                                    <p><small><strong>Envoyé le:</strong> ${msg.timestamp ? new Date(msg.timestamp).toLocaleString() : 'N/A'}</small></p>
+                                </div>
+                            `;
+                            messagesContainer.innerHTML += messageCard;
+                        });
+                    } else {
+                        console.log('No messages in database');
+                        messagesContainer.innerHTML = '<p class="text-center">Aucun message pour le moment.</p>';
+                    }
+                }, (error) => {
+                    console.error('Error fetching messages:', error);
+                    messagesContainer.innerHTML = '<p class="text-center">Erreur lors du chargement des messages: ' + error.message + '</p>';
+                });
+            } catch (error) {
+                console.error('Firebase initialization failed:', error);
+                document.getElementById('messagesContainer').innerHTML = '<p class="text-center">Erreur: Firebase non initialisé.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof firebase !== 'undefined' && firebase.initializeApp) {
+                initFirebase();
+            } else {
+                console.error('Firebase script not loaded');
+                document.getElementById('messagesContainer').innerHTML = '<p class="text-center">Erreur: Firebase non chargé. Veuillez vérifier votre connexion internet.</p>';
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
