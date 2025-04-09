@@ -358,7 +358,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#accueil" data-lang-key="home">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#accueil" onclick="showSection('accueil');" data-lang-key="home">Accueil</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="performanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-lang-key="performance">Performance</a>
                         <ul class="dropdown-menu" aria-labelledby="performanceDropdown">
@@ -393,8 +393,8 @@
                             <li><a class="dropdown-item" href="https://wkwgroup-my.sharepoint.com/:x:/g/personal/houssine_trabelsi_wkw-group_com/ETxX6xG42nFJqQV1-PaMiFIB2aBMLG-Ux7JdHCwLSOYtIA?e=B1xLbs" target="_blank">Planning Gemba</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#contact" id="contactToggle" data-bs-toggle="collapse" data-bs-target="#contactSection" data-lang-key="contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contactList" id="messagesToggle" data-lang-key="messages">Messages Reçus</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact" id="contactToggle" onclick="showSection('contact'); toggleContact();" data-lang-key="contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contactList" id="messagesToggle" onclick="showSection('contactList'); toggleMessages();" data-lang-key="messages">Messages Reçus</a></li>
                     <li class="nav-item"><button class="nav-link night-mode-toggle" id="nightModeToggle" data-lang-key="nightMode">Mode Nuit</button></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle language-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Langue</a>
@@ -453,7 +453,7 @@
         </div>
     </div>
 
-    <section id="contact" class="section-container container">
+    <section id="contact" class="section-container container" style="display: none;">
         <div class="collapse" id="contactSection">
             <div class="contact-form">
                 <h2 class="text-center mb-4" data-lang-key="contactTitle">Contactez-nous</h2>
@@ -515,6 +515,7 @@
             } catch (e) {
                 console.warn('localStorage blocked:', e);
             }
+            showSection('accueil'); // Reset to home section on language change
         }
 
         function getLocalStorage(key, defaultValue) {
@@ -583,8 +584,7 @@
             const dashArray = (numericValue / 100) * 471;
             progressCircle.style.strokeDasharray = `${dashArray} 471`;
 
-            section.style.display = 'block';
-            section.scrollIntoView({ behavior: 'smooth' });
+            showSection('percentageResult');
         }
 
         document.querySelectorAll('.percentage-item').forEach(item => {
@@ -605,16 +605,12 @@
                 const password = prompt('Entrez le mot de passe pour voir les messages reçus:');
                 if (password === MESSAGES_PASSWORD) {
                     isAuthenticatedMessages = true;
-                    document.getElementById('contactList').style.display = 'block';
-                    document.getElementById('contactList').scrollIntoView({ behavior: 'smooth' });
-                    console.log('Messages section unlocked');
+                    showSection('contactList');
                 } else if (password !== null) {
                     alert('Mot de passe incorrect!');
                 }
             } else {
-                document.getElementById('contactList').style.display = 'block';
-                document.getElementById('contactList').scrollIntoView({ behavior: 'smooth' });
-                console.log('Messages section re-displayed');
+                showSection('contactList');
             }
         });
 
@@ -637,11 +633,40 @@
             }
         });
 
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section-container').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Show the selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close any open collapsible sections
+            const collapsibleSections = document.querySelectorAll('.collapse.show');
+            collapsibleSections.forEach(section => {
+                new bootstrap.Collapse(section).hide();
+            });
+        }
+
+        function toggleContact() {
+            const contactSection = document.getElementById('contactSection');
+            if (contactSection) {
+                new bootstrap.Collapse(contactSection, { toggle: true });
+            }
+        }
+
+        function toggleMessages() {
+            if (isAuthenticatedMessages) {
+                showSection('contactList');
+            }
+        }
+
         document.getElementById('contactToggle').addEventListener('click', function(e) {
             e.preventDefault();
-            const contactSection = document.getElementById('contactSection');
-            const collapse = new bootstrap.Collapse(contactSection, { toggle: true });
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            toggleContact();
         });
 
         document.querySelectorAll('[data-bs-toggle="modal"]').forEach(link => {
@@ -731,6 +756,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            showSection('accueil'); // Ensure only 'accueil' is visible on load
             if (typeof firebase !== 'undefined' && firebase.initializeApp) {
                 initFirebase();
             } else {
