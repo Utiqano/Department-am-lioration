@@ -394,7 +394,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#contact" id="contactToggle" onclick="showSection('contact'); toggleContact();" data-lang-key="contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contactList" id="messagesToggle" onclick="showSection('contactList'); toggleMessages();" data-lang-key="messages">Messages Reçus</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contactList" id="messagesToggle" onclick="handleMessagesToggle();" data-lang-key="messages">Messages Reçus</a></li>
                     <li class="nav-item"><button class="nav-link night-mode-toggle" id="nightModeToggle" data-lang-key="nightMode">Mode Nuit</button></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle language-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Langue</a>
@@ -598,21 +598,21 @@
             });
         });
 
-        const messagesToggle = document.getElementById('messagesToggle');
-        messagesToggle.addEventListener('click', (e) => {
-            e.preventDefault();
+        function handleMessagesToggle() {
             if (!isAuthenticatedMessages) {
                 const password = prompt('Entrez le mot de passe pour voir les messages reçus:');
                 if (password === MESSAGES_PASSWORD) {
                     isAuthenticatedMessages = true;
                     showSection('contactList');
+                    console.log('Messages section unlocked');
                 } else if (password !== null) {
                     alert('Mot de passe incorrect!');
+                    showSection('accueil'); // Return to home if password is wrong
                 }
             } else {
                 showSection('contactList');
             }
-        });
+        }
 
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
@@ -655,12 +655,6 @@
             const contactSection = document.getElementById('contactSection');
             if (contactSection) {
                 new bootstrap.Collapse(contactSection, { toggle: true });
-            }
-        }
-
-        function toggleMessages() {
-            if (isAuthenticatedMessages) {
-                showSection('contactList');
             }
         }
 
